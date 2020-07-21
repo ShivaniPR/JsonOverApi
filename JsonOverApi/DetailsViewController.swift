@@ -4,7 +4,7 @@ import RxCocoa
 import RxDataSources
 
 extension MySection : SectionModelType {
-    typealias Item = Contact
+    typealias Item = Person
     
     init(original: MySection, items: [Item]) {
         self = original
@@ -12,9 +12,9 @@ extension MySection : SectionModelType {
     }
 }
 
-class ContactAPI {
-    static func getContacts(price : Dictionary<String, String>) -> Contact{
-        let contact = Contact(emailId: price["emailId"]!, firstName: price["firstName"]!, lastName: price["lastName"]!, imageUrl: price["imageUrl"]!)
+class PersonDetails {
+    static func getDetails(price : Dictionary<String, String>) -> Person{
+        let contact = Person(emailId: price["emailId"]!, firstName: price["firstName"]!, lastName: price["lastName"]!, imageUrl: price["imageUrl"]!)
         return contact
     }
 }
@@ -23,7 +23,7 @@ class DetailsViewController: UIViewController{
     let disposeBag = DisposeBag()
     let detail = UserDefaults.standard.object(forKey: "Data")!
     let tableView = UITableView()
-    var contact:Array<Contact> = []
+    var contact:Array<Person> = []
     var dataSource: RxTableViewSectionedReloadDataSource<MySection>?
     
     override func viewDidLoad() {
@@ -32,7 +32,7 @@ class DetailsViewController: UIViewController{
         view.addSubview(tableView)
         if let prices = detail as? [[String:String]] {
             for price in prices {
-                let contacts = ContactAPI.getContacts(price : price)
+                let contacts = PersonDetails.getDetails(price : price)
                 contact.append(contacts)
             }
         }
@@ -41,14 +41,14 @@ class DetailsViewController: UIViewController{
         tableView.leftAnchor.constraint(equalTo:view.safeAreaLayoutGuide.leftAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo:view.safeAreaLayoutGuide.rightAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo:view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        tableView.register(ContactTableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(PersonTableViewCell.self, forCellReuseIdentifier: "Cell")
         setDataSource()
     }
     func setDataSource(){
         let sections = [MySection(items: contact)]
         let dataSource = RxTableViewSectionedReloadDataSource<MySection>(
             configureCell: { dataSource, cv, indexPath, item in
-                let cell = cv.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ContactTableViewCell
+                let cell = cv.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PersonTableViewCell
                 cell.backgroundColor = .white
                 cell.contact = self.contact[indexPath.row]
                 return cell

@@ -1,8 +1,8 @@
 import UIKit
 
-class ContactTableViewCell: UITableViewCell {
+class PersonTableViewCell: UITableViewCell {
     
-    var contact:Contact? {
+    var contact:Person? {
         didSet {
             guard let contactItem = contact else {return}
             if let fname = contactItem.firstName {

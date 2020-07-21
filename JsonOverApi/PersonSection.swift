@@ -1,4 +1,4 @@
-struct Contact {
+struct Person {
     var emailId : String?
     var firstName : String?
     var lastName : String?
