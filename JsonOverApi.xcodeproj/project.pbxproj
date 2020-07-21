@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29017C3F24C2105200E85A59 /* PersonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29017C3E24C2105200E85A59 /* PersonTableViewCell.swift */; };
+		29017C4124C57BD900E85A59 /* MySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29017C4024C57BD900E85A59 /* MySection.swift */; };
+		294DFC1B24B817D800C3DE73 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 294DFC1A24B817D800C3DE73 /* Localizable.strings */; };
+		29509CB824BEBA7C00A08E7D /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29509CB724BEBA7C00A08E7D /* DetailsViewController.swift */; };
+		29509CBA24BEBEF900A08E7D /* PersonSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29509CB924BEBEF900A08E7D /* PersonSection.swift */; };
 		2959B12F24B6D8D000AC6997 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2959B12E24B6D8D000AC6997 /* AppDelegate.swift */; };
 		2959B13124B6D8D000AC6997 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2959B13024B6D8D000AC6997 /* SceneDelegate.swift */; };
 		2959B13324B6D8D000AC6997 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2959B13224B6D8D000AC6997 /* ViewController.swift */; };
@@ -17,6 +22,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		29017C3E24C2105200E85A59 /* PersonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTableViewCell.swift; sourceTree = "<group>"; };
+		29017C4024C57BD900E85A59 /* MySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySection.swift; sourceTree = "<group>"; };
+		294DFC1A24B817D800C3DE73 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		29509CB724BEBA7C00A08E7D /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		29509CB924BEBEF900A08E7D /* PersonSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonSection.swift; sourceTree = "<group>"; };
 		2959B12B24B6D8D000AC6997 /* JsonOverApi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JsonOverApi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2959B12E24B6D8D000AC6997 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2959B13024B6D8D000AC6997 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,7 +75,12 @@
 			children = (
 				2959B12E24B6D8D000AC6997 /* AppDelegate.swift */,
 				2959B13024B6D8D000AC6997 /* SceneDelegate.swift */,
+				29509CB724BEBA7C00A08E7D /* DetailsViewController.swift */,
+				29017C4024C57BD900E85A59 /* MySection.swift */,
+				29017C3E24C2105200E85A59 /* PersonTableViewCell.swift */,
+				29509CB924BEBEF900A08E7D /* PersonSection.swift */,
 				2959B13224B6D8D000AC6997 /* ViewController.swift */,
+				294DFC1A24B817D800C3DE73 /* Localizable.strings */,
 				2959B13424B6D8D000AC6997 /* Main.storyboard */,
 				2959B13724B6D8D600AC6997 /* Assets.xcassets */,
 				2959B13924B6D8D600AC6997 /* LaunchScreen.storyboard */,
@@ -152,6 +167,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2959B13B24B6D8D600AC6997 /* LaunchScreen.storyboard in Resources */,
+				294DFC1B24B817D800C3DE73 /* Localizable.strings in Resources */,
 				2959B13824B6D8D600AC6997 /* Assets.xcassets in Resources */,
 				2959B13624B6D8D000AC6997 /* Main.storyboard in Resources */,
 			);
@@ -206,9 +222,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29017C4124C57BD900E85A59 /* MySection.swift in Sources */,
+				29017C3F24C2105200E85A59 /* PersonTableViewCell.swift in Sources */,
+				29509CBA24BEBEF900A08E7D /* PersonSection.swift in Sources */,
 				2959B13324B6D8D000AC6997 /* ViewController.swift in Sources */,
 				2959B12F24B6D8D000AC6997 /* AppDelegate.swift in Sources */,
 				2959B13124B6D8D000AC6997 /* SceneDelegate.swift in Sources */,
+				29509CB824BEBA7C00A08E7D /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

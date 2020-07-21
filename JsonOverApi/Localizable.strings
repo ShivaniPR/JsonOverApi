@@ -1,0 +1,5 @@
+"emailTextBoxPlaceholder" = "Enter your email";
+"submitButton" = "Submit";
+"incorrectEmailString" = "The email you entered was invalid. Please try again.";
+"incorrectEmailTitle" = "Invalid Email";
+"okay" = "OK";
