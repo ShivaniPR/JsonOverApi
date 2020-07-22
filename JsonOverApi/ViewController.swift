@@ -4,20 +4,24 @@ import RxCocoa
 
 class ViewController: UIViewController {
     let disposeBag = DisposeBag()
-    let email = UITextField()
-    let submit = UIButton()
-    let invalidEmail = UILabel()
+    weak var email:UITextField!
+    weak var submit:UIButton!
     let emailPlaceholder = NSLocalizedString("emailTextBoxPlaceholder", comment: "")
     let buttonTitle = NSLocalizedString("submitButton", comment: "")
     let incorrectEmail = NSLocalizedString("incorrectEmailString", comment: "")
     let incorrectEmailTitle = NSLocalizedString("incorrectEmailTitle", comment: "")
-    let okayButton = NSLocalizedString("okay", comment: "")
+    let okayButton = NSLocalizedString("okButtonText", comment: "")
     let userDefaults = UserDefaults.standard
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        let emailId = UITextField()
+        email = emailId
+        let submitButton = UIButton()
+        submit = submitButton
         view.backgroundColor = .white
         emailTextDisplay()
-        submitButton()
+        submitButtonDisplay()
     }
     
     func emailTextDisplay(){
@@ -36,7 +40,7 @@ class ViewController: UIViewController {
         ])
     }
     
-    func submitButton(){
+    func submitButtonDisplay(){
         submit.translatesAutoresizingMaskIntoConstraints = false
         submit.setTitle(String.localizedStringWithFormat(buttonTitle), for: .normal)
         submit.backgroundColor = UIColor.red
@@ -60,7 +64,7 @@ class ViewController: UIViewController {
             invalidEmailDisplay()
             return
         }
-        let changeVC = DetailsViewController()
+        let changeVC = PersonTableViewController()
         present(changeVC, animated: true, completion: nil)
         let postBody = ["emailId" : "\(email.text!)"]
         guard let requestUrl = URL(string: "https://surya-interview.appspot.com/list") else { return }
@@ -73,8 +77,8 @@ class ViewController: UIViewController {
             guard let data = data else {return}
             do{
                 let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String:Any]
-                let p = json["items"]
-                self.userDefaults.set(p, forKey: "Data")
+                let personDetails = json["items"]
+                self.userDefaults.set(personDetails, forKey: "Data")
             }catch let jsonErr{
                 print(jsonErr)
             }
@@ -89,9 +93,9 @@ class ViewController: UIViewController {
         alert.addAction(UIAlertAction(title: String.localizedStringWithFormat(okayButton), style: .default, handler: { action in
             self.email.text = " "}))
         self.present(alert, animated: true)
-        submit.backgroundColor = UIColor.red
     }
 }
+
 extension String {
     func isValidEmail() -> Bool {
         let regex = try! NSRegularExpression(pattern: "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}", options: .caseInsensitive)

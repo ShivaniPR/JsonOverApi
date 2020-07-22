@@ -13,27 +13,27 @@ extension MySection : SectionModelType {
 }
 
 class PersonDetails {
-    static func getDetails(price : Dictionary<String, String>) -> Person{
-        let contact = Person(emailId: price["emailId"]!, firstName: price["firstName"]!, lastName: price["lastName"]!, imageUrl: price["imageUrl"]!)
+    static func getDetails(person : Dictionary<String, String>) -> Person{
+        let contact = Person(emailId: person["emailId"]!, firstName: person["firstName"]!, lastName: person["lastName"]!, imageUrl: person["imageUrl"]!)
         return contact
     }
 }
 
-class DetailsViewController: UIViewController{
+class PersonTableViewController: UIViewController{
     let disposeBag = DisposeBag()
-    let detail = UserDefaults.standard.object(forKey: "Data")!
+    let personData = UserDefaults.standard.object(forKey: "Data")!
     let tableView = UITableView()
-    var contact:Array<Person> = []
+    var personDetails:Array<Person> = []
     var dataSource: RxTableViewSectionedReloadDataSource<MySection>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         view.addSubview(tableView)
-        if let prices = detail as? [[String:String]] {
-            for price in prices {
-                let contacts = PersonDetails.getDetails(price : price)
-                contact.append(contacts)
+        if let personData = personData as? [[String:String]] {
+            for person in personData {
+                let persons = PersonDetails.getDetails(person : person)
+                personDetails.append(persons)
             }
         }
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -45,12 +45,12 @@ class DetailsViewController: UIViewController{
         setDataSource()
     }
     func setDataSource(){
-        let sections = [MySection(items: contact)]
+        let sections = [MySection(items: personDetails)]
         let dataSource = RxTableViewSectionedReloadDataSource<MySection>(
             configureCell: { dataSource, cv, indexPath, item in
                 let cell = cv.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PersonTableViewCell
                 cell.backgroundColor = .white
-                cell.contact = self.contact[indexPath.row]
+                cell.person = self.personDetails[indexPath.row]
                 return cell
         })
         self.dataSource = dataSource
@@ -62,7 +62,7 @@ class DetailsViewController: UIViewController{
     }
 }
 
-extension DetailsViewController : UITableViewDelegate {
+extension PersonTableViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }

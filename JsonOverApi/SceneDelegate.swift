@@ -9,7 +9,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: winScene)
         let launchedBefore = UserDefaults.standard.bool(forKey: "launchBefore")
         if launchedBefore  {
-            window?.rootViewController = DetailsViewController()
+            window?.rootViewController = PersonTableViewController()
         } else {
             window?.rootViewController = ViewController()
             UserDefaults.standard.set(true, forKey: "launchBefore")

@@ -2,23 +2,22 @@ import UIKit
 
 class PersonTableViewCell: UITableViewCell {
     
-    var contact:Person? {
+    var person:Person? {
         didSet {
-            guard let contactItem = contact else {return}
-            if let fname = contactItem.firstName {
+            guard let person = person else {return}
+            if let fname = person.firstName {
                 firstnameLabel.text = fname
-                profileImageView.downloaded(from: contactItem.imageUrl!)
+                profileImageView.downloaded(from: person.imageUrl!)
             }
-            if let lname = contactItem.lastName {
+            if let lname = person.lastName {
                 lastnameLabel.text = lname
             }
-            if let email = contactItem.emailId {
-                emailIdLabel.text = " \(email) "
+            if let email = person.emailId {
+                emailIdLabel.text = email
             }
         }
     }
-    
-    let containerView:UIView = {
+    var containerView:UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.clipsToBounds = true 
