@@ -7,12 +7,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let winScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: winScene)
-        let launchedBefore = UserDefaults.standard.bool(forKey: "launchBefore")
+        let launchedBefore = UserDefaults.standard.bool(forKey: "launchBeforeo")
         if launchedBefore  {
             window?.rootViewController = PersonTableViewController()
         } else {
             window?.rootViewController = ViewController()
-            UserDefaults.standard.set(true, forKey: "launchBefore")
+            UserDefaults.standard.set(true, forKey: "launchBeforeo")
         }
         window?.makeKeyAndVisible() 
     }

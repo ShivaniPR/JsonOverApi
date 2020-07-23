@@ -1,3 +1,3 @@
-struct MySection {
+struct TableSections {
     var items: [Item]
 }

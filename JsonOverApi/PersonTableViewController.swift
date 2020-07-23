@@ -3,11 +3,10 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-extension MySection : SectionModelType {
+extension TableSections : SectionModelType {
     typealias Item = Person
     
-    init(original: MySection, items: [Item]) {
-        self = original
+    init(original: TableSections, items: [Item]) {
         self.items = items
     }
 }
@@ -22,13 +21,19 @@ class PersonDetails {
 class PersonTableViewController: UIViewController{
     let disposeBag = DisposeBag()
     let personData = UserDefaults.standard.object(forKey: "Data")!
-    let tableView = UITableView()
+    weak var tableView:UITableView!
     var personDetails:Array<Person> = []
-    var dataSource: RxTableViewSectionedReloadDataSource<MySection>?
+    var dataSource: RxTableViewSectionedReloadDataSource<TableSections>?
+
+    override func viewDidAppear(_ animated: Bool) {
+        setDataSource()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        let table = UITableView()
+        tableView = table
         view.addSubview(tableView)
         if let personData = personData as? [[String:String]] {
             for person in personData {
@@ -42,11 +47,11 @@ class PersonTableViewController: UIViewController{
         tableView.rightAnchor.constraint(equalTo:view.safeAreaLayoutGuide.rightAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo:view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         tableView.register(PersonTableViewCell.self, forCellReuseIdentifier: "Cell")
-        setDataSource()
     }
+    
     func setDataSource(){
-        let sections = [MySection(items: personDetails)]
-        let dataSource = RxTableViewSectionedReloadDataSource<MySection>(
+        let sections = [TableSections(items: personDetails)]
+        let dataSource = RxTableViewSectionedReloadDataSource<TableSections>(
             configureCell: { dataSource, cv, indexPath, item in
                 let cell = cv.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PersonTableViewCell
                 cell.backgroundColor = .white
@@ -57,6 +62,7 @@ class PersonTableViewController: UIViewController{
         Observable.just(sections)
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
+            
         
         tableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
