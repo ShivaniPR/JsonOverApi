@@ -31,7 +31,7 @@ class PersonTableViewController: UIViewController{
         view.addSubview(tableView)
         if let personData = personData as? [[String:String]] {
             for person in personData {
-                let persons = PersonDetails.getDetails(person : person)
+                let persons = Person(person: person)
                 personDetails.append(persons)
             }
         }

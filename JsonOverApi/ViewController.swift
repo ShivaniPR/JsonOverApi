@@ -86,7 +86,6 @@ class ViewController: UIViewController {
                 self.userDefaults.set(personDetails, forKey: "Data")
             }catch let jsonErr{
                 self.setJsonErrorAlert()
-                print(jsonErr)
             }
         }
         task.resume()

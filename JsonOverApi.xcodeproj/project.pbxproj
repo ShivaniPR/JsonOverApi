@@ -10,7 +10,6 @@
 		29017C3F24C2105200E85A59 /* PersonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29017C3E24C2105200E85A59 /* PersonTableViewCell.swift */; };
 		29017C4124C57BD900E85A59 /* TableSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29017C4024C57BD900E85A59 /* TableSections.swift */; };
 		294DFC1B24B817D800C3DE73 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 294DFC1A24B817D800C3DE73 /* Localizable.strings */; };
-		294E485C24CAAA4600492172 /* PersonDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294E485B24CAAA4600492172 /* PersonDetails.swift */; };
 		29509CB824BEBA7C00A08E7D /* PersonTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29509CB724BEBA7C00A08E7D /* PersonTableViewController.swift */; };
 		29509CBA24BEBEF900A08E7D /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29509CB924BEBEF900A08E7D /* Person.swift */; };
 		2959B12F24B6D8D000AC6997 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2959B12E24B6D8D000AC6997 /* AppDelegate.swift */; };
@@ -26,7 +25,6 @@
 		29017C3E24C2105200E85A59 /* PersonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTableViewCell.swift; sourceTree = "<group>"; };
 		29017C4024C57BD900E85A59 /* TableSections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableSections.swift; sourceTree = "<group>"; };
 		294DFC1A24B817D800C3DE73 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
-		294E485B24CAAA4600492172 /* PersonDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetails.swift; sourceTree = "<group>"; };
 		29509CB724BEBA7C00A08E7D /* PersonTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTableViewController.swift; sourceTree = "<group>"; };
 		29509CB924BEBEF900A08E7D /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		2959B12B24B6D8D000AC6997 /* JsonOverApi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JsonOverApi.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,7 +76,6 @@
 				2959B12E24B6D8D000AC6997 /* AppDelegate.swift */,
 				2959B13024B6D8D000AC6997 /* SceneDelegate.swift */,
 				29509CB724BEBA7C00A08E7D /* PersonTableViewController.swift */,
-				294E485B24CAAA4600492172 /* PersonDetails.swift */,
 				29017C4024C57BD900E85A59 /* TableSections.swift */,
 				29017C3E24C2105200E85A59 /* PersonTableViewCell.swift */,
 				29509CB924BEBEF900A08E7D /* Person.swift */,
@@ -228,7 +225,6 @@
 				29017C4124C57BD900E85A59 /* TableSections.swift in Sources */,
 				29017C3F24C2105200E85A59 /* PersonTableViewCell.swift in Sources */,
 				29509CBA24BEBEF900A08E7D /* Person.swift in Sources */,
-				294E485C24CAAA4600492172 /* PersonDetails.swift in Sources */,
 				2959B13324B6D8D000AC6997 /* ViewController.swift in Sources */,
 				2959B12F24B6D8D000AC6997 /* AppDelegate.swift in Sources */,
 				2959B13124B6D8D000AC6997 /* SceneDelegate.swift in Sources */,
