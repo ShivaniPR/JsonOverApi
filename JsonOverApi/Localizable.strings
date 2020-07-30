@@ -3,3 +3,5 @@
 "incorrectEmailString" = "The email you entered was invalid. Please try again.";
 "incorrectEmailTitle" = "Invalid Email";
 "okButtonText" = "OK";
+"error" = "Error";
+"errorMessage" = "Unable to make connection to server.";

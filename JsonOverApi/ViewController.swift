@@ -10,21 +10,21 @@ class ViewController: UIViewController {
     let buttonTitle = NSLocalizedString("submitButton", comment: "")
     let incorrectEmail = NSLocalizedString("incorrectEmailString", comment: "")
     let incorrectEmailTitle = NSLocalizedString("incorrectEmailTitle", comment: "")
+    let error = NSLocalizedString("error", comment: "")
+    let errorMessage = NSLocalizedString("errorMessage", comment: "")
     let okayButton = NSLocalizedString("okButtonText", comment: "")
     let userDefaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let emailId = UITextField()
-        email = emailId
-        let submitButton = UIButton()
-        submit = submitButton
         view.backgroundColor = .white
         emailTextDisplay()
         submitButtonDisplay()
     }
     
     func emailTextDisplay(){
+        let emailId = UITextField()
+        email = emailId
         email.translatesAutoresizingMaskIntoConstraints = false
         email.placeholder = String.localizedStringWithFormat(emailPlaceholder)
         email.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1)
@@ -41,6 +41,8 @@ class ViewController: UIViewController {
     }
     
     func submitButtonDisplay(){
+        let submitButton = UIButton()
+        submit = submitButton
         submit.translatesAutoresizingMaskIntoConstraints = false
         submit.setTitle(String.localizedStringWithFormat(buttonTitle), for: .normal)
         submit.backgroundColor = UIColor.systemBlue
@@ -63,7 +65,7 @@ class ViewController: UIViewController {
     func didTapOnSubmit()
     {
         guard email.text!.isValidEmail() else {
-            invalidEmailDisplay()
+            setInvalidEmailAlert()
             return
         }
         UserDefaults.standard.set(true, forKey: "launchedBefore")
@@ -83,13 +85,22 @@ class ViewController: UIViewController {
                 let personDetails = json["items"]
                 self.userDefaults.set(personDetails, forKey: "Data")
             }catch let jsonErr{
+                self.setJsonErrorAlert()
                 print(jsonErr)
             }
         }
         task.resume()
     }
     
-    func invalidEmailDisplay(){
+    func setJsonErrorAlert(){
+        let alert = UIAlertController(title: String.localizedStringWithFormat(error),
+                                      message: String.localizedStringWithFormat(errorMessage),
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: String.localizedStringWithFormat(okayButton), style: .default, handler: .none))
+        self.present(alert, animated: true)
+    }
+    
+    func setInvalidEmailAlert(){
         let alert = UIAlertController(title: String.localizedStringWithFormat(incorrectEmailTitle),
                                       message: String.localizedStringWithFormat(incorrectEmail),
                                       preferredStyle: .alert)
