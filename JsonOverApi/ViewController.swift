@@ -4,8 +4,8 @@ import RxCocoa
 
 class ViewController: UIViewController {
     let disposeBag = DisposeBag()
-    weak var email:UITextField!
-    weak var submit:UIButton!
+    private weak var email:UITextField!
+    private weak var submit:UIButton!
     let emailPlaceholder = NSLocalizedString("emailTextBoxPlaceholder", comment: "")
     let buttonTitle = NSLocalizedString("submitButton", comment: "")
     let incorrectEmail = NSLocalizedString("incorrectEmailString", comment: "")
@@ -29,13 +29,13 @@ class ViewController: UIViewController {
         email.placeholder = String.localizedStringWithFormat(emailPlaceholder)
         email.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1)
         email.tintColor = .lightGray
-        email.layer.cornerRadius = 15
+        email.layer.cornerRadius = 8
         email.textAlignment = .center
         view.addSubview(email)
         NSLayoutConstraint.activate([
             email.topAnchor.constraint(equalTo:view.topAnchor,constant: 220),
-            email.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 20),
-            email.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -20),
+            email.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 25),
+            email.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -25),
             email.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -400)
         ])
     }
@@ -43,13 +43,15 @@ class ViewController: UIViewController {
     func submitButtonDisplay(){
         submit.translatesAutoresizingMaskIntoConstraints = false
         submit.setTitle(String.localizedStringWithFormat(buttonTitle), for: .normal)
-        submit.backgroundColor = UIColor.red
-        submit.layer.cornerRadius = 15
+        submit.backgroundColor = UIColor.systemBlue
+        submit.layer.cornerRadius = 8
+        submit.titleLabel?.font = UIFont.systemFont(ofSize: 19)
+        submit.setTitleColor(UIColor(displayP3Red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5), for: .highlighted)
         view.addSubview(submit)
         NSLayoutConstraint.activate([
             submit.topAnchor.constraint(equalTo:email.topAnchor,constant: 70),
-            submit.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 20),
-            submit.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -20),
+            submit.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 25),
+            submit.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -25),
             submit.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -330)
         ])
         submit.rx.tap
@@ -64,8 +66,9 @@ class ViewController: UIViewController {
             invalidEmailDisplay()
             return
         }
-        let changeVC = PersonTableViewController()
-        present(changeVC, animated: true, completion: nil)
+        UserDefaults.standard.set(true, forKey: "launchedBefore")
+        let loginVC = PersonTableViewController()
+        self.navigationController?.pushViewController(loginVC, animated: true)
         let postBody = ["emailId" : "\(email.text!)"]
         guard let requestUrl = URL(string: "https://surya-interview.appspot.com/list") else { return }
         var request = URLRequest(url: requestUrl)
@@ -74,7 +77,7 @@ class ViewController: UIViewController {
         guard let http = try? JSONSerialization.data(withJSONObject: postBody, options: []) else {return}
         request.httpBody = http
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            guard let data = data else {return}
+            guard let data = data else { return}
             do{
                 let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String:Any]
                 let personDetails = json["items"]

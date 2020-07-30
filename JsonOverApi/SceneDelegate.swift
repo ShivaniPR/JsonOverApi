@@ -3,18 +3,18 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    var navigationController: UINavigationController?
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let winScene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(windowScene: winScene)
-        let launchedBefore = UserDefaults.standard.bool(forKey: "launchBeforeo")
+        window = UIWindow(windowScene: winScene)        
+        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
         if launchedBefore  {
-            window?.rootViewController = PersonTableViewController()
+            navigationController = UINavigationController(rootViewController: PersonTableViewController())
         } else {
-            window?.rootViewController = ViewController()
-            UserDefaults.standard.set(true, forKey: "launchBeforeo")
+            navigationController = UINavigationController(rootViewController: ViewController())
         }
-        window?.makeKeyAndVisible() 
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -47,4 +47,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
-

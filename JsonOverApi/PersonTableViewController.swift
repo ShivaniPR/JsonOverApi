@@ -11,20 +11,13 @@ extension TableSections : SectionModelType {
     }
 }
 
-class PersonDetails {
-    static func getDetails(person : Dictionary<String, String>) -> Person{
-        let contact = Person(emailId: person["emailId"]!, firstName: person["firstName"]!, lastName: person["lastName"]!, imageUrl: person["imageUrl"]!)
-        return contact
-    }
-}
-
 class PersonTableViewController: UIViewController{
     let disposeBag = DisposeBag()
     let personData = UserDefaults.standard.object(forKey: "Data")!
-    weak var tableView:UITableView!
+    private weak var tableView:UITableView!
     var personDetails:Array<Person> = []
     var dataSource: RxTableViewSectionedReloadDataSource<TableSections>?
-
+    
     override func viewDidAppear(_ animated: Bool) {
         setDataSource()
     }
@@ -32,6 +25,7 @@ class PersonTableViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        self.navigationItem.hidesBackButton = true
         let table = UITableView()
         tableView = table
         view.addSubview(tableView)
@@ -47,6 +41,23 @@ class PersonTableViewController: UIViewController{
         tableView.rightAnchor.constraint(equalTo:view.safeAreaLayoutGuide.rightAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo:view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         tableView.register(PersonTableViewCell.self, forCellReuseIdentifier: "Cell")
+        storeProfileImage(images: personDetails)
+    }
+    
+    func storeProfileImage(images : [Person]){
+        for image in images{
+            let url = URL(string: image.imageUrl!)!
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                if let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+                    let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+                    let data = data, error == nil{
+                    UserDefaults.standard.set(data, forKey: image.emailId!)
+                }
+                else {
+                    print("404 Image Not Found")
+                    return }
+            }.resume()
+        }
     }
     
     func setDataSource(){
@@ -62,7 +73,7 @@ class PersonTableViewController: UIViewController{
         Observable.just(sections)
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
-            
+        
         
         tableView.rx.setDelegate(self).disposed(by: disposeBag)
     }
@@ -73,3 +84,5 @@ extension PersonTableViewController : UITableViewDelegate {
         return 100
     }
 }
+
+
