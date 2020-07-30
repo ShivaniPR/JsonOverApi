@@ -1,23 +1,20 @@
-//
-//  SceneDelegate.swift
-//  JsonOverApi
-//
-//  Created by Shivani P R on 09/07/20.
-//  Copyright © 2020 Shivani P R. All rights reserved.
-//
-
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
-
+    var navigationController: UINavigationController?
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let winScene = (scene as? UIWindowScene) else { return }
+        window = UIWindow(windowScene: winScene)        
+        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+        if launchedBefore  {
+            navigationController = UINavigationController(rootViewController: PersonTableViewController())
+        } else {
+            navigationController = UINavigationController(rootViewController: ViewController())
+        }
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -50,4 +47,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
-
